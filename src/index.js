@@ -17,10 +17,18 @@ export const init = function() {
     let text = this.innerText;
     offlineDIV.innerHTML = marked(text);
     
-    query('code', function (code) {
+    query('code', function(code) {
       let span = create('span');
       span.innerHTML = code.innerHTML;
+      span.className = 'code';
       code.parentNode.replaceChild(span, code);
+    });
+
+    query('a', function(a) {
+      let span = create('span');
+      span.innerHTML = a.innerHTML;
+      span.className = 'link';
+      a.parentNode.replaceChild(span, a);
     });
     
     previewDOM.innerHTML = offlineDIV.innerHTML;

@@ -37,4 +37,168 @@ html, body {
   flex: 1;
   padding: 20px 0 20px 20px;
   border-left: 1px solid red;
+  font-family: sans-serif;
+}
+
+
+/**
+ * text styles
+*/
+.md-preview h2,
+.md-preview h3,
+.md-preview h4,
+.md-preview h5,
+.md-preview h6 {
+  position: relative;
+  color: #42b983;
+  margin: 10px 0;
+}
+
+.md-preview h2,
+.md-preview h3 {
+  font-size: 18px
+}
+
+.md-preview h4,
+.md-preview h5,
+.md-preview h6 {
+  font-size: 14px
+}
+
+.md-preview .link,
+.md-preview a {
+  text-decoration: none;
+  color: #42b983;
+  word-break: break-all
+}
+
+.md-preview blockquote {
+  border-left: 4px solid #42b983;
+  word-wrap: normal;
+  word-break: normal;
+  background: #f5f5f5;
+  padding: 10px;
+  margin: 0;
+  font-size: 12px;
+  font-family: Arial, Helvetica,SimSun, 宋体, serif
+}
+
+.md-preview blockquote p {
+  margin: 0
+}
+
+.md-preview blockquote>br {
+  display: none
+}
+
+.md-preview blockquote .highlight {
+  background: none;
+  margin: 0
+}
+
+.md-preview blockquote .highlight .code,
+.md-preview blockquote .highlight pre {
+  background: none
+}
+
+.md-preview img {
+  display: block;
+  max-width: 100%;
+  margin: 20px auto 30px
+}
+
+.md-preview > table,
+.md-preview > figure.highlight {
+  box-shadow: 0 1px 2px rgba(0,0,0,0.125)
+}
+
+.md-preview .tip {
+  position: relative;
+  margin: 2em 0;
+  padding: 12px 24px 12px 30px;
+  border-left: 4px solid #f66;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+  background-color: #f8f8f8
+}
+
+.md-preview .tip br {
+  display: none
+}
+
+.md-preview .tip:before {
+  position: absolute;
+  top: 14px;
+  left: -12px;
+  content: "!";
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  color: #fff;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: bold;
+  text-align: center;
+  background-color: #f66;
+  font-family: 'Dosis', 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif
+}
+
+.md-preview > p {
+  margin: 10px 0;
+  text-align: justify;
+  text-justify: inter-ideograph;
+  word-wrap: break-word;
+  word-break: break-all
+}
+
+.md-preview > p .code {
+  white-space: pre-wrap;
+  word-break: break-all;
+  word-wrap: break-word
+}
+
+.md-preview > p:first-child {
+  margin-top: 0
+}
+
+.md-preview hr {
+    border: 0
+}
+
+.md-preview code,
+.md-preview .code {
+    margin: 0 2px;
+    padding: 3px 5px;
+    color: #e96900;
+    border-radius: 2px;
+    white-space: inherit
+}
+
+.md-preview iframe,video {
+    max-width: 100%;
+    margin: 1rem auto;
+    display: block
+}
+
+.md-preview table {
+    width: 100%;
+    margin: 1em auto
+}
+
+.md-preview table thead {
+    background-color: #ddd
+}
+
+.md-preview table thead th {
+    padding: 5px;
+    min-width: 80px
+}
+
+.md-preview table tbody tr:nth-child(2n) {
+    background-color: #eee
+}
+
+.md-preview table tbody td {
+    padding: 5px;
+    vertical-align: text-top
 }
