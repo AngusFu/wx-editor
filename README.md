@@ -2,6 +2,3 @@
 
 simple wechat public platform editor.
 
-## TODO
-
-customize my text styles.

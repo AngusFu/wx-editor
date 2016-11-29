@@ -5,6 +5,8 @@ import resolve from 'rollup-plugin-node-resolve';
 import uglify from 'rollup-plugin-uglify';
 import { minify } from 'uglify-js';
 
+import css from 'rollup-plugin-css-only'
+
 const conf = {
   entry: 'src/index.js',
   dest: 'dist/bundle.js',
@@ -12,6 +14,7 @@ const conf = {
   moduleName: "wxEditor",
   context: 'window',
   plugins: [
+    css({ output: './dist/bundle.css' }),
     resolve({
       jsnext: true,
       main: true,
