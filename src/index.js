@@ -24,8 +24,13 @@ export const init = function() {
 
     query('pre', function(pre) {
       highlight(pre);
-      let lines = pre.firstElementChild.innerHTML.split('\n');
-      lines = lines.map((line) => `<div class="line">${line}</div>`);
+      let lines = pre.firstElementChild.innerHTML.trim().split('\n');
+      // lines = lines.map((line) => (
+      //   !!line.trim()
+      //     ? `<p class="line">${line}</p>`
+      //     : `<p class="lbr"></p>`
+      // ));
+      lines = lines.map((line) => line + '<br>');
       pre.innerHTML = lines.join('');
     });
     
