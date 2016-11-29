@@ -1,2 +1,7 @@
-# wx-pub-eidtor
-simple wechat public platform editor
+# wx-pub-editor
+
+simple wechat public platform editor.
+
+## TODO
+
+customize my text styles.
