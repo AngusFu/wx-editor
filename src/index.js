@@ -4,6 +4,7 @@ import 'highlight.js/styles/default.css';
 import marked from 'marked';
 import hljs from 'highlight.js';
 const highlight = hljs.highlightBlock;
+hljs.configure({ tabReplace: '  '}); 
 
 const create = (tag) => document.createElement(tag);
 const getDOM = (s) => document.querySelector(s);
@@ -24,13 +25,15 @@ export const init = function() {
 
     query('pre', function(pre) {
       highlight(pre);
+
       let lines = pre.firstElementChild.innerHTML.trim().split('\n');
-      // lines = lines.map((line) => (
-      //   !!line.trim()
-      //     ? `<p class="line">${line}</p>`
-      //     : `<p class="lbr"></p>`
-      // ));
-      lines = lines.map((line) => line + '<br>');
+      
+      lines = lines.map((line) => {
+        line = line.replace(/(^\s+)/g, m => '&nbsp;'.repeat(m.length));
+        return !!line.trim() ? `<p class="line">${line}</p>` : `<p class="lbr"><br></p>`;
+      });
+
+      // lines = lines.map((line) => line + '<br>');
       pre.innerHTML = lines.join('');
     });
     
@@ -40,12 +43,28 @@ export const init = function() {
       span.className = 'code';
       code.parentNode.replaceChild(span, code);
     });
+    
+    // 所有 pre 外面包裹一层 div
+    query('pre', function(pre) {
+      let clone = pre.cloneNode();
+      clone.innerHTML = pre.innerHTML;
+
+      let figure = create('section');
+      figure.className = 'code-wrap';
+      figure.appendChild(clone);
+
+      pre.parentNode.replaceChild(figure, pre);
+    });
 
     query('a', function(a) {
       let span = create('span');
       span.innerHTML = a.innerHTML;
       span.className = 'link';
       a.parentNode.replaceChild(span, a);
+    });
+
+    query('img', function(img) {
+      img.parentNode.className += 'img-wrap';
     });
     
     previewDOM.innerHTML = offlineDIV.innerHTML;

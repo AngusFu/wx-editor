@@ -35,3 +35,8 @@ jspm_packages
 
 # Optional REPL history
 .node_repl_history
+
+# 暂时注释掉
+manifest.json
+ext/
+edit.png
