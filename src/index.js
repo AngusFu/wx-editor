@@ -23,6 +23,7 @@ export const init = function() {
     let text = this.innerText;
     offlineDIV.innerHTML = marked(text);
 
+    // 处理代码换行
     query('pre', function(pre) {
       highlight(pre);
 
@@ -33,29 +34,45 @@ export const init = function() {
         return !!line.trim() ? `<p class="line">${line}</p>` : `<p class="lbr"><br></p>`;
       });
 
-      // lines = lines.map((line) => line + '<br>');
       pre.innerHTML = lines.join('');
     });
     
+    // 处理行间 code 样式
     query('code', function(code) {
       let span = create('span');
       span.innerHTML = code.innerHTML;
       span.className = 'code';
       code.parentNode.replaceChild(span, code);
     });
+
+    // blockquote 添加类名
+    query('blockquote', function(blockquote) {
+      blockquote.className = 'blockquote';
+
+      let lines = blockquote.firstElementChild.innerHTML.trim().split('\n');
+
+      lines = lines.map((line) => {
+        line = line.replace(/(^\s+)/g, m => '&nbsp;'.repeat(m.length));
+        return !!line.trim() ? `<p>${line}</p>` : `<p><br></p>`;
+      });
+      blockquote.innerHTML = lines.join('');
+    });
     
-    // 所有 pre 外面包裹一层 div
+    // 所有 pre 外面包裹一层 blockquote
+    // 使用 figure 等标签都不行
+    // 会导致微信编辑器中粘贴时会多出一个 p 标签
     query('pre', function(pre) {
       let clone = pre.cloneNode();
       clone.innerHTML = pre.innerHTML;
 
-      let figure = create('section');
-      figure.className = 'code-wrap';
-      figure.appendChild(clone);
+      let wrap = create('blockquote');
+      wrap.className = 'code-wrap';
+      wrap.appendChild(clone);
 
-      pre.parentNode.replaceChild(figure, pre);
+      pre.parentNode.replaceChild(wrap, pre);
     });
 
+    // 处理所有 a 链接
     query('a', function(a) {
       let span = create('span');
       span.innerHTML = a.innerHTML;
@@ -63,6 +80,7 @@ export const init = function() {
       a.parentNode.replaceChild(span, a);
     });
 
+    // img 处理
     query('img', function(img) {
       img.parentNode.className += 'img-wrap';
     });
