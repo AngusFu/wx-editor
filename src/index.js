@@ -1,5 +1,5 @@
 import './styles.css';
-import 'highlight.js/styles/default.css';
+import 'highlight.js/styles/github-gist.css';
 
 import marked from 'marked';
 import hljs from 'highlight.js';
