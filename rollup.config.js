@@ -5,7 +5,7 @@ import resolve from 'rollup-plugin-node-resolve';
 import uglify from 'rollup-plugin-uglify';
 import { minify } from 'uglify-js';
 
-import css from 'rollup-plugin-css-only'
+import css from 'rollup-plugin-css-only';
 
 const conf = {
   entry: 'src/index.js',
@@ -19,7 +19,7 @@ const conf = {
       jsnext: true,
       main: true,
       browser: true,
-      extensions: [ '.ts', '.js', '.json' ]
+      extensions: ['.js', '.json']
     }),
     commonjs(),
     json(),
