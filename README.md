@@ -1,4 +1,4 @@
-# wx-pub-editor
+# wx-editor
 
 微信公众号 Markdown 转换工具。
 
