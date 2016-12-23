@@ -16,7 +16,6 @@ export const init = function() {
   const eidtorDOM  = getDOM('.md-editor');
   const previewDOM = getDOM('.md-preview');
   const offlineDIV = create('div');
-
   const query = (s, cb) => getAll(s, offlineDIV).forEach(el => cb && cb(el));
 
   eidtorDOM.addEventListener('input', function () {
@@ -92,6 +91,16 @@ export const init = function() {
   getDOM('#jsCopy').addEventListener('click', function() {
     copy(previewDOM);
   });
+
+  eidtorDOM.addEventListener('blur', function (e) {
+    try {
+      localStorage['wx-editor'] = eidtorDOM.innerHTML;
+    } catch (e) {
+      console.error(e);
+    }
+  });
+
+  eidtorDOM.innerHTML = localStorage['wx-editor'] || '';
 };
 
 
