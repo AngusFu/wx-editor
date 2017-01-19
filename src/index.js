@@ -1,10 +1,13 @@
 import './styles.css';
-import 'highlight.js/styles/github-gist.css';
-
 import marked from 'marked';
-import hljs from 'highlight.js';
-const highlight = hljs.highlightBlock;
-hljs.configure({ tabReplace: '  '}); 
+
+marked.setOptions({
+  highlight: function (code, lang, callback) {
+    lang = lang === 'js' ? 'javascript' : (lang || 'javascript');
+    let langConfig = Prism.languages[lang] || Prism.languages.javascript;
+    return Prism.highlight(code, langConfig);
+  }
+});
 
 const create = (tag) => document.createElement(tag);
 const getDOM = (s) => document.querySelector(s);
@@ -24,16 +27,20 @@ export const init = function() {
 
     // 处理代码换行
     query('pre', function(pre) {
-      highlight(pre);
+      // pre>code.lang-x
+      let codeElem = pre.firstElementChild;
+      let lines = codeElem.innerHTML.trim().split('\n');
 
-      let lines = pre.firstElementChild.innerHTML.trim().split('\n');
-      
-      lines = lines.map((line) => {
+      let match = codeElem.className.match(/(?:^|\s)lang-([^\s]+)/);
+      let lang  = match && match[1] || 'javascript';
+      lang = Prism.languages[lang] ? lang : 'javascript';
+
+      pre.innerHTML = lines.map((line) => {
         line = line.replace(/(^\s+)/g, m => '&nbsp;'.repeat(m.length));
         return !!line.trim() ? `<p class="line">${line}</p>` : `<p class="lbr"><br></p>`;
-      });
+      }).join('');
 
-      pre.innerHTML = lines.join('');
+      pre.classList.add(`language-${lang}`);
     });
     
     // 处理行间 code 样式
@@ -80,8 +87,12 @@ export const init = function() {
     });
 
     // img 处理
+    // 只针对单个成一段的 img
     query('img', function(img) {
-      img.parentNode.className += 'img-wrap';
+      // <p><img src=""></p>
+      if (img.parentNode.innerHTML.trim() === img.outerHTML.trim()) {
+        img.parentNode.className += 'img-wrap';
+      }
     });
     
     previewDOM.innerHTML = offlineDIV.innerHTML;
@@ -92,6 +103,18 @@ export const init = function() {
     copy(previewDOM);
   });
 
+  // change code theme
+  let themes = 'default|funky|okaidia|solarizedlight|tomorrow|twilight'.split('|');
+  let themesLen = themes.length;
+  let currentThemeIndex = -1;
+  getDOM('#jsChangeTheme').addEventListener('click', function () {
+    currentThemeIndex += 1;
+    let type = themes[currentThemeIndex % themesLen];
+    type = type === 'default' ? '' : type;
+    changePrismTheme(type);
+  });
+
+  // history
   eidtorDOM.addEventListener('blur', function (e) {
     try {
       localStorage['wx-editor'] = eidtorDOM.innerHTML;
@@ -99,8 +122,8 @@ export const init = function() {
       console.error(e);
     }
   });
-
   eidtorDOM.innerHTML = localStorage['wx-editor'] || '';
+  dispatch(eidtorDOM, 'input');
 };
 
 
@@ -119,3 +142,17 @@ function copy(element) {
   selection.removeAllRanges();
 };
 
+function dispatch(elem, name) {
+  let evt = document.createEvent('HTMLEvents');
+  evt.initEvent(name, false, false);
+  elem.dispatchEvent(evt);
+}
+
+function changePrismTheme(type) {
+  let url = './themes/prism.css';
+
+  if (type) {
+    url = `./themes/prism-${type}.css`;
+  }
+  getDOM('#prismTheme').setAttribute('href', url);
+}
