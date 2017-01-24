@@ -51,6 +51,8 @@ html, body {
   font-size: 14px;
 }
 
+
+/**======================================================*/
 /*-----------------------------
         custom styles
 -----------------------------*/
@@ -71,22 +73,35 @@ html, body {
 .md-preview h3,
 .md-preview h4 {
   font-weight: bold;
+  word-break: break-all;
+  word-wrap: break-word;
 }
 .md-preview h1 {
-  display: none;
+  font-size: 28px;
 }
 .md-preview h2 {
   font-size: 24px;
   margin: 20px 0 12px;
 }
+.md-preview h2 .code {
+  font-size: 24px;
+}
+
 .md-preview h3 {
   font-size: 20px;
   margin: 12px 0 8px;
 }
+.md-preview h3 .code {
+  font-size: 20px;
+}
+
 .md-preview h4 {
   font-weight: bold;
   font-size: 16px;
   margin: 8px 0 5px;
+}
+.md-preview h4 .code {
+  font-size: 16px;
 }
 
 .md-preview h1 > *,
@@ -100,14 +115,6 @@ html, body {
   margin-top: 0;
 }
 
-.md-preview .code-wrap {
-  /*margin-top: 10px;
-  border-radius: 2px;
-  overflow-x: auto;
-  font-size: 12px;
-  padding: 10px;
-  background: #F0F0F0;*/
-}
 .md-preview .pre,
 .md-preview pre {
   display: block;
@@ -121,6 +128,7 @@ html, body {
   white-space: nowrap;
   word-wrap: break-word!important;
   background: #F0F0F0;
+  color: #fff;
   font-family: Consolas, Lucida Console, Courier New, monospace;
 }
 .md-preview .line,
@@ -131,18 +139,35 @@ html, body {
   line-height: 16px;
   white-space: nowrap!important;
 }
+.md-preview .lbr {
+  line-height: 0;
+  height: 6px;
+}
 
 .md-preview .code {
   font-size: 12px;
   margin: 0 2px;
-  padding: 3px 5px;
-  color: #666;
+  font-family: monospace;
+  padding: 2px 4px;
+  color: #d14;
+  background-color: #f7f7f9;
+  border: 1px solid #e1e1e8;
   border-radius: 2px;
-  background-color: #F0F0F0;
+}
+.md-preview .link {
+  color: #1980e6;
+}
+
+.md-preview p {
+  text-align: justify;
+}
+.md-preview p,
+.md-preview .code,
+.md-preview .link {
   white-space: pre-wrap;
   word-break: break-all;
   word-wrap: break-word;
-  font-family: monospace;
+  hyphens: auto;
 }
 
 .md-preview img {
@@ -154,10 +179,6 @@ html, body {
   text-align: center;
 }
 
-.md-preview .link {
-  color: #1980e6;
-}
-
 .md-preview ul,
 .md-preview ol {
   padding-left: 10px;
@@ -165,7 +186,7 @@ html, body {
 }
 .md-preview li {
   margin: 10px 0 10px 10px;
-  font-size: 10px;
+  font-size: 14px;
 }
 
 .md-preview .blockquote {
@@ -200,6 +221,7 @@ html, body {
 }
 .md-preview table tr {
   border-bottom: 1px solid #1491e8;
+  text-align: left;
 }
 .md-preview table td,
 .md-preview table th {
@@ -213,6 +235,7 @@ html, body {
 .md-preview table td + td {
   padding-left: 15px;
 }
+
 
 .md-config {
   position: absolute;
