@@ -133,7 +133,7 @@ getDOM('#jsCopy').addEventListener('click', function() {
 
 
 // change code theme
-let themes = 'okaidia|default|funky|solarizedlight|tomorrow|twilight'.split('|');
+let themes = 'default|funky|solarizedlight|tomorrow|twilight|okaidia'.split('|');
 let themesLen = themes.length;
 let currentThemeIndex = -1;
 getDOM('#jsChangeTheme').addEventListener('click', function () {

@@ -254,9 +254,8 @@ html, body {
   vertical-align: middle;
 }
 
-.container > .change-theme {
+.container > .clip-btn {
   position: absolute;
-  right: 50px;
   top: 4px;
   background: #eee;
   padding: 0 10px;
@@ -267,8 +266,12 @@ html, body {
   color: #333;
   opacity: 1;
 }
-.container > .change-theme:hover {
+.container > .clip-btn:hover {
   background-color: #ddd;
+}
+
+.container > .change-theme {
+  right: 140px;
 }
 
 /*-----------------------------
@@ -280,8 +283,9 @@ html, body {
   opacity: .5;
   padding: 2px 6px;
   position: absolute;
-  right: 4px;
-  top: 4px
+  right: 20px;
+  top: 4px;
+  text-decoration: none;
 }
 
 .highlight:hover .clip-btn {

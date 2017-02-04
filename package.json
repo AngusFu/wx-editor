@@ -3,10 +3,8 @@
   "version": "1.0.0",
   "description": "wechat public platform editor",
   "scripts": {
-    "server": "browser-sync start --server --reload-delay 1 --files \"*.css,*.html,dist/*.js\"",
-    "build": "rollup -c./rollup.config.js ",
-    "watch": "rollup -c ./rollup.config.js -w",
-    "start": "run-p watch server"
+    "server": "browser-sync start --server --reload-delay 1 --files \"./src/**\"",
+    "start": "npm run server"
   },
   "repository": {
     "type": "git",
@@ -23,20 +21,7 @@
     "url": "https://github.com/AngusFu/wx-editor/issues"
   },
   "homepage": "https://github.com/AngusFu/wx-editor#readme",
-  "dependencies": {
-    "marked": "^0.3.6"
-  },
   "devDependencies": {
-    "browser-sync": "^2.18.2",
-    "npm-run-all": "^3.1.1",
-    "rollup": "^0.36.3",
-    "rollup-plugin-buble": "^0.14.0",
-    "rollup-plugin-commonjs": "^5.0.5",
-    "rollup-plugin-css-only": "^0.0.4",
-    "rollup-plugin-json": "^2.0.2",
-    "rollup-plugin-node-resolve": "^2.0.0",
-    "rollup-plugin-uglify": "^1.0.1",
-    "rollup-watch": "^2.5.0",
-    "uglify-js": "^2.7.4"
+    "browser-sync": "^2.18.2"
   }
 }
